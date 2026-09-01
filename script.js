@@ -1,0 +1,6 @@
+document.addEventListener("DOMContentLoaded",()=>{
+ const toggle=document.querySelector(".menu"),nav=document.querySelector("#site-menu");
+ if(toggle&&nav){toggle.addEventListener("click",()=>{const open=nav.classList.toggle("open");toggle.setAttribute("aria-expanded",String(open));toggle.textContent=open?"×":"☰"});nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("open");toggle.setAttribute("aria-expanded","false");toggle.textContent="☰"}));}
+ document.querySelectorAll("[data-contact-form]").forEach(form=>form.addEventListener("submit",e=>{e.preventDefault(); if(!form.checkValidity()){form.reportValidity();return;} const d=new FormData(form); const subject=d.get("subject")||`Demande d'inscription - ASDigitales`; const body=[`Nom : ${d.get("name")||""}`,`Email : ${d.get("email")||""}`,`Téléphone : ${d.get("phone")||""}`,`Formation : ${d.get("formation")||""}`,`Message : ${d.get("message")||""}`].join("\n"); const url=`mailto:asdigitales26@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; const s=form.querySelector(".success"); if(s)s.textContent="Votre messagerie va s’ouvrir avec votre demande préremplie."; window.location.href=url;}));
+ const year=document.querySelector("#year");if(year)year.textContent=new Date().getFullYear();
+});
